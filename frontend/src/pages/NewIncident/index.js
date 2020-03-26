@@ -27,6 +27,13 @@ export default function NewIncident() {
 		};
 
 		try {
+			for (let dat in data) {
+				console.log(data[dat]);
+				if (data[dat].length === 0) {
+					return;
+				}
+			}
+
 			await api.post("incidents", data, {
 				headers: {
 					Authorization: ongId

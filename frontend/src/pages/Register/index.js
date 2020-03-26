@@ -29,12 +29,22 @@ export default function Register() {
 		};
 
 		try {
+			for (let dat in data) {
+				console.log(data[dat]);
+				if (data[dat].length === 0) {
+					return;
+				}
+			}
+
 			const res = await api.post("ongs", data);
+			const otherOngs = await api.get("ongs");
+
+			console.log(otherOngs);
 
 			alert(`Seu ID é ${res.data.id}`);
 
 			history.push("/");
-		} catch (err) {
+		} catch (erro) {
 			alert(`Erro no cadastro, tente novamente.`);
 		}
 	}
@@ -73,8 +83,9 @@ export default function Register() {
 					/>
 
 					<input
-						type="text"
-						placeholder="Whatsapp"
+						type="tel"
+						pattern="^\d{2}\d{5}\d{4}$"
+						placeholder="27123456789"
 						value={whatsapp}
 						onChange={e => setWhatsapp(e.target.value)}
 					/>
