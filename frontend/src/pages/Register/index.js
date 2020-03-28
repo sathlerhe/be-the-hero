@@ -29,12 +29,6 @@ export default function Register() {
 		};
 
 		try {
-			for (let dat in data) {
-				console.log(data[dat]);
-				if (data[dat].length === 0) {
-					return;
-				}
-			}
 
 			const res = await api.post("ongs", data);
 			const otherOngs = await api.get("ongs");
@@ -44,7 +38,7 @@ export default function Register() {
 			alert(`Seu ID é ${res.data.id}`);
 
 			history.push("/");
-		} catch (erro) {
+		} catch (err) {
 			alert(`Erro no cadastro, tente novamente.`);
 		}
 	}
@@ -73,13 +67,16 @@ export default function Register() {
 						placeholder="Nome da ONG"
 						value={name}
 						onChange={e => setName(e.target.value)}
+						required={true}
 					/>
 
 					<input
 						type="email"
 						placeholder="seuemail@exemplo.com"
 						value={email}
+						pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
 						onChange={e => setEmail(e.target.value)}
+						required={true}
 					/>
 
 					<input
@@ -88,6 +85,7 @@ export default function Register() {
 						placeholder="27123456789"
 						value={whatsapp}
 						onChange={e => setWhatsapp(e.target.value)}
+						required={true}
 					/>
 
 					<div className="inputGroup">
@@ -96,6 +94,7 @@ export default function Register() {
 							placeholder="Cidade"
 							value={city}
 							onChange={e => setCity(e.target.value)}
+							required={true}
 						/>
 						<input
 							type="text"
@@ -103,6 +102,8 @@ export default function Register() {
 							style={{ width: 80 }}
 							value={uf}
 							onChange={e => setUf(e.target.value)}
+							required={true}
+							pattern="^[A-Z a-z]{2}"
 						/>
 					</div>
 

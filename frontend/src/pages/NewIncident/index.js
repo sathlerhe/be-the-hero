@@ -27,13 +27,6 @@ export default function NewIncident() {
 		};
 
 		try {
-			for (let dat in data) {
-				console.log(data[dat]);
-				if (data[dat].length === 0) {
-					return;
-				}
-			}
-
 			await api.post("incidents", data, {
 				headers: {
 					Authorization: ongId
@@ -69,12 +62,14 @@ export default function NewIncident() {
 						type="text"
 						placeholder="Título do caso"
 						value={title}
+						required={true}
 						onChange={e => setTitle(e.target.value)}
 					/>
 
 					<textarea
 						placeholder="Descreva o caso, para ficar mais entendível"
 						value={description}
+						required={true}
 						onChange={e => setDescription(e.target.value)}
 					/>
 
@@ -82,6 +77,7 @@ export default function NewIncident() {
 						type="number"
 						placeholder="Valor em reais"
 						value={value}
+						required={true}
 						onChange={e => setValue(e.target.value)}
 					/>
 
